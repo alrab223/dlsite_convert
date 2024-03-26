@@ -9,16 +9,6 @@ h1 {
    color: #333;
 }
 
-textarea, #resultText {
-   width: 100%;
-   box-sizing: border-box;
-   margin-bottom: 20px;
-}
-
-textarea {
-   height: 150px;
-}
-
 button {
    background-color: #008cba;
    color: white;
@@ -33,12 +23,21 @@ button {
    border-radius: 5px;
 }
 
+textarea, #resultText {
+   font-size: 16px; /* この値をお好みで調整してください */
+   width: 100%;
+   box-sizing: border-box;
+   margin-bottom: 20px;
+}
+
 #resultText {
    background-color: #fff;
    padding: 20px;
    border: 1px solid #ddd;
    min-height: 150px;
+   white-space: pre-wrap; /* 改行と空白を保持するため */
 }
+
 
 @media (max-width: 600px) {
    body {

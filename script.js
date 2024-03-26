@@ -27,15 +27,32 @@ const replacements = {
 };
 
 function replaceText() {
-   // 入力テキストを取得
    let text = document.getElementById('inputText').value;
 
-   // 置き換え処理
-   for (const [original, replacement] of Object.entries(replacements)) {
-      const regex = new RegExp(original, 'g');
-      text = text.replace(regex, replacement);
+   // 置き換えルールを単語の長さに基づいて降順にソート
+   const sortedReplacements = Object.entries(replacements).sort((a, b) => b[0].length - a[0].length);
+
+   // テキストを一文字ずつスキャン
+   let resultText = "";
+   let i = 0;
+   while (i < text.length) {
+       let replaced = false;
+       for (const [original, replacement] of sortedReplacements) {
+           // テキストの現在位置から始まる部分文字列が置き換え対象にマッチするかチェック
+           if (text.substr(i, original.length) === original) {
+               // マッチした場合は置き換えを行い、スキャン位置を更新
+               resultText += replacement;
+               i += original.length;
+               replaced = true;
+               break; // 最長マッチを見つけたら内側のループを抜ける
+           }
+       }
+       if (!replaced) {
+           // どの単語にもマッチしない場合は、現在の文字を結果に追加し、次の文字へ
+           resultText += text[i];
+           i++;
+       }
    }
 
-   // 結果を表示
-   document.getElementById('resultText').innerText = text;
+   document.getElementById('resultText').innerText = resultText;
 }
