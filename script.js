@@ -40,11 +40,11 @@ function replaceText() {
        for (const [original, replacement] of sortedReplacements) {
            // テキストの現在位置から始まる部分文字列が置き換え対象にマッチするかチェック
            if (text.substr(i, original.length) === original) {
-               // マッチした場合は置き換えを行い、スキャン位置を更新
+               // マッチした場合は置き換え
                resultText += replacement;
                i += original.length;
                replaced = true;
-               break; // 最長マッチを見つけたら内側のループを抜ける
+               break; 
            }
        }
        if (!replaced) {
